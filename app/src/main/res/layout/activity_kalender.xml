@@ -30,7 +30,7 @@
                 android:clickable="true"
                 android:contentDescription="btnBack"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="intentKeHome"
+                android:onClick="back"
                 app:backgroundTint="#FFFFFF"
                 app:elevation="2dp"
                 app:layout_constraintStart_toStartOf="parent"

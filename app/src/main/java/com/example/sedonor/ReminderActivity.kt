@@ -32,7 +32,11 @@ class ReminderActivity : AppCompatActivity() {
         val sisa = intent.getStringExtra("SISAWAKTU")
 
         tvSisaWaktu = findViewById(R.id.tvSisaHari)
-        tvSisaWaktu.text = sisa
+        if(sisa!!.toInt() > 0) {
+            tvSisaWaktu.text = sisa + " " + "hari menuju donor \ndarah berikutnya!"
+        }else{
+            tvSisaWaktu.text = "0 hari menuju donor \ndarah berikutnya!"
+        }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){

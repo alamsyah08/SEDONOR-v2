@@ -62,7 +62,12 @@ class KalenderActivity : AppCompatActivity() {
         val sisa = intent.getStringExtra("SISAWAKTU")
         sisaWaktu = sisa.toString()
         tvSisaWaktu = findViewById(R.id.tvDate)
-        tvSisaWaktu.text = sisa + " "+"hari menuju donor \ndarah berikutnya!"
+
+        if(sisa!!.toInt() > 0) {
+            tvSisaWaktu.text = sisa + " " + "hari menuju donor \ndarah berikutnya!"
+        }else{
+            tvSisaWaktu.text = "Sudah waktunya \ndonor darah!"
+        }
 
         sessionManager = SessionManager(this)
         retrievedUserId = sessionManager.getUserId().toString()
@@ -323,6 +328,12 @@ class KalenderActivity : AppCompatActivity() {
 
     fun btnReminder(view: View){
         val intent = Intent(this, ReminderActivity::class.java)
+        intent.putExtra("SISAWAKTU", sisaWaktu)
+        startActivity(intent)
+    }
+
+    fun back(view: View){
+        val intent = Intent(this, HomePage::class.java)
         intent.putExtra("SISAWAKTU", sisaWaktu)
         startActivity(intent)
     }

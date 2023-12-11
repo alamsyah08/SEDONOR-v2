@@ -81,7 +81,7 @@ class HomePage : AppCompatActivity() {
             if(x < sisaWaktu.toInt()){
                 tvDate.text = sisaWaktu.toString() +" "+"hari menuju donor \ndarah berikutnya!"
             }else{
-                tvDate.text = "0 hari menuju donor berikutnya!"
+                tvDate.text = "Sudah waktunya \ndonor darah!"
             }
         }
 

@@ -153,6 +153,8 @@ class HomePage : AppCompatActivity() {
                             intent.putExtra("lokasi", clickedArtikel.lokasi)
                             intent.putExtra("deskripsi", clickedArtikel.deskripsi)
                             intent.putExtra("foto", clickedArtikel.foto)
+                            intent.putExtra("klatitude", clickedArtikel.koordinat.latitude.toString())
+                            intent.putExtra("klongitude", clickedArtikel.koordinat.longitude.toString())
 
                             //Mulai aktivitas DetailArtikel
                             startActivity(intent)
@@ -297,9 +299,10 @@ class HomePage : AppCompatActivity() {
             // Retrieve data from Firestore document
             val deskripsi = document.getString("deskripsi")
             val foto = document.getString("foto")
+            val koordinat = document.getGeoPoint("koordinat")
             val lokasi = document.getString("lokasi")
             val nama = document.getString("nama")
-            val riwayat = LokasiDonor(deskripsi.toString(), foto.toString(),lokasi.toString(), nama.toString())
+            val riwayat = LokasiDonor(deskripsi.toString(), foto.toString(), koordinat!!,lokasi.toString(), nama.toString())
             riwayatList.add(riwayat)
             Log.w("data",riwayat.toString())
         }

@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "background": "#FF69B4",
+    "land": "#FF69B4",
+    "water": "#FFC0CB",
+    "text": "#FFFFFF",
+    "labels": "#FFFFFF",
+    "geometry.stroke": "#FFFFFF",
+    "geometry.fill": "#FF69B4"
+  }
+}

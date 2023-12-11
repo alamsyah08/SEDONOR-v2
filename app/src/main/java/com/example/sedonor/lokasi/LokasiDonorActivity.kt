@@ -51,8 +51,10 @@ class LokasiDonorActivity : AppCompatActivity() {
                             intent.putExtra("lokasi", clickedArtikel.lokasi)
                             intent.putExtra("deskripsi", clickedArtikel.deskripsi)
                             intent.putExtra("foto", clickedArtikel.foto)
+                            intent.putExtra("klatitude", clickedArtikel.koordinat.latitude.toString())
+                            intent.putExtra("klongitude", clickedArtikel.koordinat.longitude.toString())
 
-//                             Mulai aktivitas DetailArtikel
+//                          Mulai aktivitas DetailArtikel
                             startActivity(intent)
                         }
                     })
@@ -67,17 +69,18 @@ class LokasiDonorActivity : AppCompatActivity() {
     }
 
     private fun convertQuerySnapshotToList(querySnapshot: QuerySnapshot?): List<LokasiDonor> {
-        val riwayatList = mutableListOf<LokasiDonor>()
+        val lokasiList = mutableListOf<LokasiDonor>()
         querySnapshot?.forEach { document: QueryDocumentSnapshot ->
             // Retrieve data from Firestore document
             val deskripsi = document.getString("deskripsi")
             val foto = document.getString("foto")
+            val koordinat = document.getGeoPoint("koordinat")
             val lokasi = document.getString("lokasi")
             val nama = document.getString("nama")
-            val riwayat = LokasiDonor(deskripsi.toString(), foto.toString(),lokasi.toString(), nama.toString())
-            riwayatList.add(riwayat)
+            val riwayat = LokasiDonor(deskripsi.toString(), foto.toString(), koordinat!!,lokasi.toString(), nama.toString())
+            lokasiList.add(riwayat)
         }
-        return riwayatList
+        return lokasiList
     }
 
     fun intentKeHome (view: View) {

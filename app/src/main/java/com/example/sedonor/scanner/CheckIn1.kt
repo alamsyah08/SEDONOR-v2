@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -126,6 +127,7 @@ class CheckIn1 : AppCompatActivity() {
             .get()
             .addOnCompleteListener { task ->
                 val tempat = convertDocumentSnapshotToLokasiDonor(task.result)
+                Log.e("scan", tempat.toString())
 
                 val intent = Intent(this, CheckinDetail::class.java)
                 intent.putExtra("NAMADONOR", tempat?.nama)

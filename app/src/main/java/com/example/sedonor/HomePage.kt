@@ -153,8 +153,8 @@ class HomePage : AppCompatActivity() {
                             intent.putExtra("lokasi", clickedArtikel.lokasi)
                             intent.putExtra("deskripsi", clickedArtikel.deskripsi)
                             intent.putExtra("foto", clickedArtikel.foto)
-                            intent.putExtra("klatitude", clickedArtikel.koordinat.latitude.toString())
-                            intent.putExtra("klongitude", clickedArtikel.koordinat.longitude.toString())
+                            intent.putExtra("klatitude", clickedArtikel.koordinat?.latitude.toString())
+                            intent.putExtra("klongitude", clickedArtikel.koordinat?.longitude.toString())
 
                             //Mulai aktivitas DetailArtikel
                             startActivity(intent)

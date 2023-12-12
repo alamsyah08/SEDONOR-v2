@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import android.view.View
 import com.bumptech.glide.Glide
+import com.example.sedonor.ChatbotPMI
 import com.example.sedonor.HomePage
 import com.example.sedonor.R
 
@@ -93,7 +94,7 @@ class ArtikelPage : AppCompatActivity() {
                 // Ganti warna ikon untuk Tanya PMI
                 item.setIcon(R.drawable.ic_tanyapmi_selected)
                 // Lakukan aksi atau pindah ke halaman Tanya PMI
-//                showToastAndNavigate("Tanya PMI Clicked", TanyaPMI::class.java)
+                showToastAndNavigate("Tanya PMI Clicked", ChatbotPMI::class.java)
             }
             R.id.menu_item_3 -> {
                 // Ganti warna ikon untuk Account

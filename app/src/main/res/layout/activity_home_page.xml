@@ -88,11 +88,10 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView1"
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="65dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="16dp"
                     android:background="@color/white"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -126,19 +125,19 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView2"
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="65dp"
 
                     android:layout_marginHorizontal="4dp"
                     android:layout_marginTop="16dp"
 
+                    android:background="@color/white"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp"
-                    android:background="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -265,7 +264,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="200dp"

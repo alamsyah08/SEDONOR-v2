@@ -33,9 +33,9 @@ class ReminderActivity : AppCompatActivity() {
 
         tvSisaWaktu = findViewById(R.id.tvSisaHari)
         if(sisa!!.toInt() > 0) {
-            tvSisaWaktu.text = sisa + " " + "hari menuju donor \ndarah berikutnya!"
+            tvSisaWaktu.text = sisa
         }else{
-            tvSisaWaktu.text = "0 hari menuju donor \ndarah berikutnya!"
+            tvSisaWaktu.text = "0"
         }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){

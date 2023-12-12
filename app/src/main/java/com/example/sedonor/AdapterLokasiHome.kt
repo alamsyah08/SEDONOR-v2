@@ -30,6 +30,7 @@ class AdapterLokasiHome(var context: Context, var list: ArrayList<LokasiDonor>) 
         val lokasiDonor = list[position]
         holder.nama.setText(lokasiDonor.nama)
         holder.lokasi.setText(lokasiDonor.lokasi)
+        holder.tanggal.setText(lokasiDonor.jadwal)
         Glide.with(context)
             .load(lokasiDonor.foto)
             .placeholder(R.drawable.background_image) // You can set a placeholder image

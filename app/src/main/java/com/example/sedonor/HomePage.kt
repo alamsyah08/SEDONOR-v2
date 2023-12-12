@@ -136,7 +136,7 @@ class HomePage : AppCompatActivity() {
                     val document = task.result.documents
                     Log.e("data", document.toString())
                     // Konversi data Firestore ke list Artikel
-                    val lokasiList = convertQuerySnapshotToListArtikel(task.result)
+                    val lokasiList = convertQuerySnapshotToListLokasi(task.result)
 
                     // Inisialisasi dan atur adapter
                     myAdapterLokasi = AdapterLokasiHome(this, lokasiList as ArrayList<LokasiDonor>)
@@ -149,12 +149,14 @@ class HomePage : AppCompatActivity() {
 
                             // Persiapkan intent untuk perpindahan halaman
                             val intent = Intent(this@HomePage, DetailLokasiActivity::class.java)
+                            intent.putExtra("alamat", clickedArtikel.alamat)
                             intent.putExtra("nama", clickedArtikel.nama)
                             intent.putExtra("lokasi", clickedArtikel.lokasi)
                             intent.putExtra("deskripsi", clickedArtikel.deskripsi)
                             intent.putExtra("foto", clickedArtikel.foto)
                             intent.putExtra("klatitude", clickedArtikel.koordinat?.latitude.toString())
                             intent.putExtra("klongitude", clickedArtikel.koordinat?.longitude.toString())
+                            intent.putExtra("jadwal", clickedArtikel.jadwal)
 
                             //Mulai aktivitas DetailArtikel
                             startActivity(intent)
@@ -286,28 +288,30 @@ class HomePage : AppCompatActivity() {
             val judul = document.getString("judul")
             val konten = document.getString("konten")
             val imageUrl = document.getString("gambar")
-            val artikel =
-                Artikel(judul, konten, imageUrl)
+            val artikel = Artikel(judul, konten, imageUrl)
             artikelList.add(artikel)
         }
         return artikelList
     }
 
-    private fun convertQuerySnapshotToListArtikel(querySnapshot: QuerySnapshot?): List<LokasiDonor> {
-        val riwayatList = mutableListOf<LokasiDonor>()
+    private fun convertQuerySnapshotToListLokasi(querySnapshot: QuerySnapshot?): List<LokasiDonor> {
+        val lokasiList = mutableListOf<LokasiDonor>()
         querySnapshot?.forEach { document: QueryDocumentSnapshot ->
             // Retrieve data from Firestore document
+            val alamat = document.getString("alamat")
             val deskripsi = document.getString("deskripsi")
             val foto = document.getString("foto")
+            val jadwal = document.getString("jadwal")
             val koordinat = document.getGeoPoint("koordinat")
             val lokasi = document.getString("lokasi")
             val nama = document.getString("nama")
-            val riwayat = LokasiDonor(deskripsi.toString(), foto.toString(), koordinat!!,lokasi.toString(), nama.toString())
-            riwayatList.add(riwayat)
+
+            val riwayat = LokasiDonor(alamat.toString(), deskripsi.toString(), foto.toString(), jadwal.toString(), koordinat!!,lokasi.toString(), nama.toString())
+            lokasiList.add(riwayat)
             Log.w("data",riwayat.toString())
         }
-        Log.w("data",riwayatList.toString())
-        return riwayatList
+        Log.w("data",lokasiList.toString())
+        return lokasiList
     }
 
     /**

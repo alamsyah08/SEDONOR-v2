@@ -16,6 +16,8 @@ class DetailLokasiActivity : AppCompatActivity() {
     private lateinit var tvLokasi: TextView
     private lateinit var tvDeskripsi: TextView
     private lateinit var tvImg: ImageView
+    private lateinit var tvAlamat: TextView
+    private lateinit var tvJadwal: TextView
 
     private lateinit var vnama: String
     private lateinit var vlatitude : String
@@ -28,6 +30,8 @@ class DetailLokasiActivity : AppCompatActivity() {
         tvNama = findViewById<TextView>(R.id.tvNama)
         tvLokasi = findViewById<TextView>(R.id.tvLokasi)
         tvDeskripsi = findViewById<TextView>(R.id.tvKontenDeskripsi)
+        tvAlamat = findViewById<TextView>(R.id.tvKontenAlamat)
+        tvJadwal = findViewById<TextView>(R.id.tvKontenJadwal)
 
         // Get data from intent
         val nama = intent.getStringExtra("nama")
@@ -36,6 +40,8 @@ class DetailLokasiActivity : AppCompatActivity() {
         val deskripsi = intent.getStringExtra("deskripsi")
         val latitude = intent.getStringExtra("klatitude")
         val longitude = intent.getStringExtra("klongitude")
+        val alamat = intent.getStringExtra("alamat")
+        val jadwal = intent.getStringExtra("jadwal")
 
         vnama = nama.toString()
         vlatitude = latitude.toString()
@@ -44,6 +50,8 @@ class DetailLokasiActivity : AppCompatActivity() {
         tvNama.text = nama
         tvLokasi.text = lokasi
         tvDeskripsi.text = deskripsi
+        tvAlamat.text = alamat
+        tvJadwal.text = jadwal
         Glide.with(this)
             .load(image)
             .placeholder(R.drawable.ic_back) //cari gambar loading

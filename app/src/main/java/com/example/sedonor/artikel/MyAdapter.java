@@ -88,4 +88,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             }
         }
     }
+
+    public void updateData(List<Artikel> newData) {
+        list.clear();
+        list.addAll(newData);
+        notifyDataSetChanged();
+    }
 }

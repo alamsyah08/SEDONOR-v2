@@ -25,17 +25,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_pink"/>
 
-    <TextView
-        android:id="@+id/tvJudulChatbot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Chatbot Tanya PMI"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ibBackChatbot"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvJudulChatbot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chatbot Tanya PMI"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ibBackChatbot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ibBackChatbot"
+            app:layout_constraintTop_toTopOf="@+id/ibBackChatbot" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView

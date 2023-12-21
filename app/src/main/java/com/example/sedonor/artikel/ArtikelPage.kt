@@ -114,7 +114,8 @@ class ArtikelPage : AppCompatActivity() {
             val judul = document.getString("judul")
             val konten = document.getString("konten")
             val imageUrl = document.getString("gambar")
-            val artikel = Artikel(judul, konten, imageUrl)
+            val kategori = document.get("kategori") as List<String>
+            val artikel = Artikel(judul, konten, imageUrl, kategori)
             artikelList.add(artikel)
         }
         return artikelList

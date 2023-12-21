@@ -275,7 +275,7 @@ class HomePage : AppCompatActivity() {
             R.id.menu_item_3 -> {
                 item.setIcon(R.drawable.ic_akun_selected)
                 // Lakukan aksi atau pindah ke halaman Account
-//                showToastAndNavigate("Account Clicked", Account::class.java)
+                showToastAndNavigate("Profil Clicked", ProfilActivity::class.java)
             }
         }
         return true
@@ -288,7 +288,8 @@ class HomePage : AppCompatActivity() {
             val judul = document.getString("judul")
             val konten = document.getString("konten")
             val imageUrl = document.getString("gambar")
-            val artikel = Artikel(judul, konten, imageUrl)
+            val kategori = document.get("kategori") as List<String>
+            val artikel = Artikel(judul, konten, imageUrl, kategori)
             artikelList.add(artikel)
         }
         return artikelList

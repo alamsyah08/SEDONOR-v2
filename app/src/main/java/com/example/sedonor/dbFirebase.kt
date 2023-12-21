@@ -47,6 +47,7 @@ class dbFirebase(private val context: Context){
                 if (task.isSuccessful) {
                     val user = Firebase.auth.currentUser
                     val userId = user?.uid.toString()
+                    val userEmail = user?.email.toString()
                     if (userId != null) {
                         sessionManager.saveUserId(userId)
                     }
@@ -59,9 +60,10 @@ class dbFirebase(private val context: Context){
                         "beratBadan" to 0,
                         "goldar" to null,
                         "riwayatPenyakit" to null,
-                        "kodeDonor" to 0,
+                        "kodeDonor" to null,
                         "status" to false,
-                        "checkin" to "01-01-2001"
+                        "checkin" to "01-01-2001",
+                        "email" to userEmail
                     )
 
                     saveData(userId, userData)
@@ -94,14 +96,4 @@ class dbFirebase(private val context: Context){
             .addOnFailureListener { e -> Log.w(TAG, "Error update document", e) }
     }
 
-//    fun getData(judul: String, uID: String){
-//        val db = firestore.collection(judul).document(uID)
-//        db.get()
-//            .addOnSuccessListener { result ->
-//
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents.", exception)
-//            }
-//    }
 }

@@ -75,6 +75,7 @@ class KalenderActivity : AppCompatActivity() {
         recyclerViewGejala.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
+        val gejalaArray = mutableListOf<String>()
         // Mengambil data gejala
         val collectionReference = db.collection("users").document(retrievedUserId).collection("gejala")
         collectionReference.whereEqualTo("status", true)
@@ -82,6 +83,8 @@ class KalenderActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val gejalaList = convertQuerySnapshotToListGejala(task.result)
+                    gejalaArray.addAll(gejalaList.map { it.nama })
+
                     myAdapterGejala = AdapterGejala(this, gejalaList as ArrayList<Gejala>)
                     myAdapterGejala.setOnItemClickListener(object : AdapterGejala.OnItemClickListener {
                         override fun onItemClick(position: Int) {
@@ -93,6 +96,7 @@ class KalenderActivity : AppCompatActivity() {
                             docRef.update("status", false)
                                 .addOnSuccessListener {
                                     refreshDataFromFirestore()
+                                    refreshDataFromFirestoreArtikel()
                                 }
                                 .addOnFailureListener { e ->
                                     Log.e("Firestore", "Error getting documents.", e)
@@ -109,16 +113,23 @@ class KalenderActivity : AppCompatActivity() {
         recyclerViewArtikel = findViewById(R.id.rvArtikel)
         recyclerViewArtikel.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         db.collection("artikels")
-
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val document = task.result.documents
                     // Konversi data Firestore ke list Artikel
                     val artikelList = convertQuerySnapshotToListArtikel(task.result)
 
+                    // Filter artikel berdasarkan kategori jika kategori
+                    val filteredArtikelList = if (gejalaArray.isNotEmpty()) {
+                        artikelList.filter { artikel ->
+                            artikel.kategori?.any { it in gejalaArray } == true
+                        }
+                    } else {
+                        artikelList
+                    }
+
                     // Inisialisasi dan atur adapter
-                    myAdapterArtikel = MyAdapter(this, artikelList as ArrayList<Artikel>)
+                    myAdapterArtikel = MyAdapter(this, filteredArtikelList as ArrayList<Artikel>)
 
                     // Set listener untuk perpindahan halaman
                     myAdapterArtikel.setOnItemClickListener(object : MyAdapter.OnItemClickListener {
@@ -174,7 +185,8 @@ class KalenderActivity : AppCompatActivity() {
             val judul = document.getString("judul")
             val konten = document.getString("konten")
             val imageUrl = document.getString("gambar")
-            val artikel = Artikel(judul, konten, imageUrl)
+            val kategori = document.get("kategori") as List<String>
+            val artikel = Artikel(judul, konten, imageUrl, kategori)
             artikelList.add(artikel)
         }
         return artikelList
@@ -182,13 +194,43 @@ class KalenderActivity : AppCompatActivity() {
 
     private fun refreshDataFromFirestore() {
         val collectionReference = db.collection("users").document(retrievedUserId).collection("gejala")
-
         collectionReference.whereEqualTo("status", true)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val gejalaList = convertQuerySnapshotToListGejala(task.result)
                     myAdapterGejala.updateData(gejalaList)
+                } else {
+                    // Handle kesalahan jika diperlukan
+                }
+            }
+    }
+
+    private fun refreshDataFromFirestoreArtikel() {
+        val gejalaArray = mutableListOf<String>()
+        // Mengambil data gejala
+        val collectionReference = db.collection("users").document(retrievedUserId).collection("gejala")
+        collectionReference.whereEqualTo("status", true)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val gejalaList = convertQuerySnapshotToListGejala(task.result)
+                    gejalaArray.addAll(gejalaList.map { it.nama })
+                }
+            }
+        db.collection("artikels")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val artikelList = convertQuerySnapshotToListArtikel(task.result)
+                    val filteredArtikelList = if (gejalaArray.isNotEmpty()) {
+                        artikelList.filter { artikel ->
+                            artikel.kategori?.any { it in gejalaArray } == true
+                        }
+                    } else {
+                        artikelList
+                    }
+                    myAdapterArtikel.updateData(filteredArtikelList)
                 } else {
                     // Handle kesalahan jika diperlukan
                 }
@@ -212,6 +254,7 @@ class KalenderActivity : AppCompatActivity() {
             docRef.update("status", true)
                 .addOnSuccessListener {
                     refreshDataFromFirestore()
+                    refreshDataFromFirestoreArtikel()
                     dialog.dismiss()
                 }
                 .addOnFailureListener { e ->
@@ -228,6 +271,7 @@ class KalenderActivity : AppCompatActivity() {
             docRef.update("status", true)
                 .addOnSuccessListener {
                     refreshDataFromFirestore()
+                    refreshDataFromFirestoreArtikel()
                     dialog.dismiss()
                 }
                 .addOnFailureListener { e ->
@@ -244,6 +288,7 @@ class KalenderActivity : AppCompatActivity() {
             docRef.update("status", true)
                 .addOnSuccessListener {
                     refreshDataFromFirestore()
+                    refreshDataFromFirestoreArtikel()
                     dialog.dismiss()
                 }
                 .addOnFailureListener { e ->
@@ -260,6 +305,7 @@ class KalenderActivity : AppCompatActivity() {
             docRef.update("status", true)
                 .addOnSuccessListener {
                     refreshDataFromFirestore()
+                    refreshDataFromFirestoreArtikel()
                     dialog.dismiss()
                 }
                 .addOnFailureListener { e ->

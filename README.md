@@ -24,5 +24,5 @@ Anggota 2:
  - Generate Artikel berdasarkan Gejala
    
 Anggota 3:
- -
- -
+ - membuat login 
+ - membuat register

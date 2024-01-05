@@ -1,6 +1,8 @@
 # Sedonor
  
 Nama Aplikasi : SEDONOR
+Sedonor merupakan sebuah aplikasi yang dirancang untuk membantu Donor Darah Sukarela (DDS) dalam memantau jadwal rutin donor darah mereka, sekaligus menjaga kesehatan dan kualitas darah yang akan didonasikan.
+
 Nama Kelompok : DECODE
 Nama Anggota:
 1) Zahwa Almira Kayla
@@ -9,8 +11,9 @@ Nama Anggota:
   
 Job Desc:
 Anggota 1:
- - Melakukan...
- - Membuat...
+ - Membuat fitur artikel (frontend dan backend)
+ - Membuat fitur chatbot (frontend dan backend)
+ - Membuat tampilan homepage (frontend)
    
 Anggota 2:
  - Membuat scanner dan halaman checkin
@@ -24,5 +27,5 @@ Anggota 2:
  - Generate Artikel berdasarkan Gejala
    
 Anggota 3:
- - membuat login 
- - membuat register
+ - Membuat login 
+ - Membuat register
